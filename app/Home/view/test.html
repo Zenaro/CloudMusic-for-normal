@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+	<audio id="player" src="../../src/home/mp3/song.mp3" controls="true" style="display:none"></audio>
+	<button id="start" type="button">start</button>
+	<button id="pause" type="button">pause</button>
+	<button id="setCur" type="button">to 20s</button>
+	<button id="downVol" type="button">vol down</button>
+	<button id="upVol" type="button">vol up</button>
+	<button id="next" type="button">next</button>
+
+<script type="text/javascript" src="../../sea-modules/seajs/sea.js"></script>
+<script type="text/javascript">
+
+	// Set configuration
+	seajs.config({
+		base: "../../sea-modules",
+		alias: {
+			"jquery" : "jquery/jquery.js"
+		}
+	});
+
+	//引入 main.js
+	seajs.use('../../src/home/js/main');
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+@charset 'utf-8';
+.main{
+	width: 600px;
+	padding: 50px;
+	overflow: hidden;
+}
+.main h3{
+	font-size: 16px;
+	line-height: 40px;
+	border-bottom: solid 1px #ccc;
+}
+.main pre.section{
+	width: 300px;
+	float: right;
+	margin-top: 20px;
+	font-size: 14px;
+	line-height: 25px;
+}
+.main pre.txtOF{
+	height: 400px;
+	overflow: hidden;
+}
+.main a{
+	width: 100%;
+	clear: both;
+	color: #0c7372;
+	line-height: 30px;
+	margin-left: 300px;
+	display: block;
+}
