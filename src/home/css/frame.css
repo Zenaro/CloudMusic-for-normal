@@ -151,7 +151,7 @@ a {
 }
 .header .top-tool .top-user .user-memb{
 	height: auto;
-	line-height: 60px;
+	line-height: 70px;
 	display: none;
 	float: left;
 	position: relative;
@@ -216,12 +216,12 @@ a {
 	width: 100%;
 	min-width: 1100px;
 	margin: 0 auto;
-	background: #eee;
+	background: #fafafa;
 }
 .wrap .wrap-in{
 	width: 1100px;
 	margin: 0 auto;
-	background: #f1f1f1;
+	background: #FAFAF5;
 }
 
 /*-------尾部版权-------*/

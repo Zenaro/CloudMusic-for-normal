@@ -188,7 +188,8 @@ define(function (require, exports, module) {
 
         // ----- audio多媒体事件委托
         $(this.audio).on('loadstart', function() {     // 正在加载 loading
-
+            
+            $('.fix-bottom').trigger("mouseover");
             $('.play-ing .pbar .cur span.btn-cur i').css('visibility', 'visible');
 
         }).on('canplay', function() {

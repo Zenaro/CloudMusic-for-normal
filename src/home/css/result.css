@@ -46,3 +46,36 @@
 	margin-left: 300px;
 	display: block;
 }
+.comment {
+	padding: 50px;
+}
+.comment h2 {
+	width: 700px;
+	line-height: 35px;
+	margin-bottom: 5px;
+}
+.comment .cell {
+	width: 700px;
+	padding: 20px 0;
+	overflow: hidden;
+	border-top: solid 1px #ccc;
+}
+.comment .cell textarea {
+	width: 680px;
+	height: 100px;
+	padding: 5px;
+}
+.comment .cell input {
+	width: 150px;
+	height: 25px;
+	margin-top: 10px;
+	margin-right: 20px;
+	letter-spacing: 2px;
+	cursor: pointer;
+	float: right;
+}
+.comment .cell i.btn-add{
+	display: block;
+	float: right;
+	cursor: pointer;
+}

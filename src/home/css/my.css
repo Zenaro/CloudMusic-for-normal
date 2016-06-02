@@ -35,14 +35,12 @@
 	cursor: pointer;
 }
 .wrap-in .main-title .sml {
-	// float: left;
 	height: 25px;
 	color: #999;
 	line-height: 30px;
 }
 
-.wrap-in .main-mlist h3,
-.wrap-in .main-mform h3 {
+.wrap-in .column h3{
 	height: 30px;
 	line-height: 30px;
 	font-size: 18px;
@@ -137,8 +135,15 @@
 	background-position: -103px -174px;
 }
 
-
 .wrap-in .main-mform ul {
 	min-height: 300px;
 	border: solid 1px #ccc;
+}
+
+.wrap-in .main-mfriend ul {
+	min-height: 300px;
+	border: solid 1px #ccc;
+}
+.wrap-in .main-mfriend ul li {
+	padding: 5px;
 }

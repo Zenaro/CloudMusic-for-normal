@@ -2,7 +2,6 @@
 
 	require './config.php';
 
-	// $query = "SELECT name, music_id, singer_name, src FROM app_singerRmusic NATURAL JOIN app_Singer  NATURAL JOIN app_Music LIMIT 20";
 	$query = "SELECT name, music_id, singer_name, src FROM app_singerRmusic NATURAL JOIN app_Singer NATURAL JOIN app_Music LIMIT 20";
 
 	$result = @mysql_query($query) or die("SQL语句有误".mysql_error());

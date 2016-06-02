@@ -2,7 +2,6 @@
 	
 	require './config.php';
 
-	$id = 4;
 	if (isset($_POST['id'])) {		// just get lyric 
 		$id = $_POST['id'];
 

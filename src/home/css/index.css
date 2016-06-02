@@ -3,7 +3,7 @@
 /*-------主页内容-------*/
 .wrap {
 	padding-top: 460px;
-	background: #eee url('../image/wrap-in.png') no-repeat center top;
+	background: #fafafa url('../image/wrap-in.png') no-repeat center top;
 	background-size: 1400px;
 }
 .wrap-in .column{

@@ -2,10 +2,10 @@
 
 	require './config.php';
 
-	if (isset($_POST['uid'])) {
-		$uid = $_POST['uid'];
+	if (isset($_GET['uid'])) {
+		$uid = $_GET['uid'];
 		
-		$query = mysql_query("SELECT music_id, name, singer_name FROM app_collection NATURAL JOIN app_Music NATURAL JOIN app_singerRmusic NATURAL JOIN app_Singer WHERE user_id='{$uid}' ORDER BY colDate DESC") or die('MySQL错误'.mysql_error());
+		$query = mysql_query("SELECT friend_id, name FROM app_friends, app_info WHERE friend_id=app_info.user_id AND app_friends.user_id='{$uid}'") or die('MySQL错误'.mysql_error());
 
 		$json = '';
 

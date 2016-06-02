@@ -1,6 +1,7 @@
 define( function ( require, exports, module ) {
 
 	function Result () {
+		this.mid = 0;
 		this.lrc = null;
 	}
 
@@ -19,6 +20,8 @@ define( function ( require, exports, module ) {
 		if ( url.indexOf("?") !== -1) {
 			var subStr1 = url.indexOf("="),
 				data_id = url.substring( subStr1 + 1,  url.length );
+
+			this.mid = data_id;
 
 			$.get('../controller/getMInfo.php?id=' + data_id, function ( result ) {	//get歌曲信息
             	var json = $.parseJSON(result)[0];
@@ -44,6 +47,21 @@ define( function ( require, exports, module ) {
 				}
 				$('.content').append(html);
 			});
+
+			$.get('../controller/getComment.php', {id: data_id}, function(res) {	// get 评论
+				var html = '',
+					json = $.parseJSON(res);
+				$.each(json, function(index, value) {
+					html += '<div class="cell" data-id="' + value.user_id +'">' +
+                				'<p>' +
+                    				'<span class="user-name">' + value.name + '：</span>' +
+                    				'<span class="user-comment">'+ value.content + '</span>' +
+                				'</p>' +
+                				'<i class="btn-add"> + 加为好友</i>' +
+            				'</div>';
+				});
+				$('.comment').append(html);
+			})
 		}
 		
 	};
@@ -63,6 +81,35 @@ define( function ( require, exports, module ) {
 				$('.main .content').addClass('txtOF');
 			}
 
+		}).on('focus', 'textarea', function() {
+
+			$(this).text('');
+
+		}).on('click', 'input[type=submit]', function() {
+
+			var html = '',
+				user_id = cookie('unique'),
+				txt = $.trim($('textarea').val());
+			$.get('../controller/setComment.php', {uid: user_id, mid: self.mid, com: txt}, function(res) {
+				if (res === 'ok') {
+					html += '<div class="cell" data-id="' + user_id +'">' +
+	            				'<p>' +
+	                				'<span class="user-name">' + $('.user-memb h4').text() + '：</span>' +
+	                				'<span class="user-comment">'+ txt + '</span>' +
+	            				'</p>' +
+	            				'<i class="btn-add"> + 加为好友</i>' +
+	        				'</div>';
+				}
+				$('.comment .cell').eq(0).after(html);
+				$('textarea').val('');
+			});
+
+		}).on('click', '.comment .cell i.btn-add', function() {
+			var my_id = cookie('unique'),
+				f_id = $(this).parent('.cell').attr('data-id');
+			$.get('../controller/setFriends.php', {my_id, f_id}, function(res) {
+				alert(res);
+			});
 		});
 
 		$('audio').on('timeupdate', function() {			// 歌词滚动

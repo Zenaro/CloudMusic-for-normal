@@ -34,14 +34,38 @@ define ( function ( require, exports, module ) {
 			history.go(-1);
 		}
 
-		$.post('../controller/myMusic.php', {uid:cookie('unique')}, function ( result ) {
-			var json = $.parseJSON(result);
+		$.post('../controller/myMusic.php', {uid:cookie('unique')}, function (res) {
+			var json = $.parseJSON(res);
 			var html = '';
 			$.each(json, function ( index, value ) {
-				html += '<li data-id="' + value.mid + '"><a href="javascript:;" class="icon-play"></a><div class="col col-1"><h4>' + value.name + '</h4><div class="master"> - ' + value.master + '</div></div><div class="col col-2"><a href="javascript:;" class="icn-add" title="添加"></a><a href="javascript:;" class="icn-col" title="收藏"></a><a href="javascript:;" class="icn-del" title="删除"></a><a href="javascript:;" class="icn-dwn" title="下载"></a></div></li>'
+				html += '<li data-id="' + value.music_id + '">' + 
+							'<a href="javascript:;" class="icon-play"></a>' +
+							'<div class="col col-1">' +
+								'<h4>' + value.name + '</h4>' +
+								'<div class="master"> - ' + value.singer_name + '</div>' +
+							'</div>' +
+							'<div class="col col-2">' +
+								'<a href="javascript:;" class="icn-add" title="添加"></a>' +
+								'<a href="javascript:;" class="icn-col" title="收藏"></a>' +
+								'<a href="javascript:;" class="icn-del" title="删除"></a>' +
+								'<a href="javascript:;" class="icn-dwn" title="下载"></a>' +
+							'</div>' +
+						'</li>';
 			});
 
 			$(self.mul).append(html);
+		});
+
+		$.get('../controller/myFriend.php', {uid: cookie('unique')}, function (res) {
+			var json = $.parseJSON(res);
+			var html = '';
+			$.each(json, function ( index, value ) {
+				html += '<li data-id="' + value.friend_id + '">' + 
+							value.name + 
+						'</li>';
+			});
+
+			$('.main-mfriend ul').append(html);
 		});
 
 	}
@@ -50,7 +74,7 @@ define ( function ( require, exports, module ) {
 
 		var self = this;
 
-		var Index = require('./index');
+		var Index = require('../index/index');
 		var I = new Index();
 
 		$('.wrap-in').on({
@@ -64,8 +88,12 @@ define ( function ( require, exports, module ) {
 
 		}, this.mlist ).on('click', this.listBtnPlay, function () {
 
-			var addID = $(this).parents('li').attr('data-id');
-			I._appendMusic( addID, true );	
+			var mid = $(this).parents('li').attr('data-id');
+			$.get('../controller/getMInfo.php?id=' + mid, function(res) {
+				var json = $.parseJSON(res)[0];
+				$('audio')[0].src = json.src;
+				$('audio')[0].play();
+			});
 
 		}).on('click', this.listBtnAdd, function () {
 

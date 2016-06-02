@@ -19,8 +19,6 @@ define( function ( require, exports, module ) {
 	}
 
 	Login.prototype._init = function() {
-		
-
 
 	}
 
@@ -45,9 +43,9 @@ define( function ( require, exports, module ) {
 					type : 'POST',
 					data : $('form').serialize(),
 					success : function( response, status, xhr ) {
-						if (response != 'false') {
+						if (response && response != 'false') {
 							cookie('unique', response);
-							// window.location.href = './index.html';
+							window.location.href = './index.html';
 						} else {
 							$(self.tips).html('帐号与密码不匹配，请重新输入');
 						}

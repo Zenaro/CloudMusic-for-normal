@@ -175,7 +175,6 @@ define( function( require, exports, module ) {
 						if (index == 0) {
 							$('audio')[0].src = value.src;
 							$('audio')[0].play();
-							$('.fix-bottom').trigger("mouseover");
 						} else {
 							self._appendEle(addID);
 						}
@@ -187,9 +186,20 @@ define( function( require, exports, module ) {
 
 			if (cookie('unique')) {
 				var t = $(this).attr('data-type');
-				$.post('../controller/colMusic.php', {uid : cookie('unique'), type:t}, function(result) {
-					alert('收藏成功');
+				$.ajax({
+					'url': '../controller/colMusic.php',
+					'type': 'POST',
+					'data': {
+						uid : cookie('unique'),
+						type: t
+					},
+					'success': function(res) {
+						alert(res);
+					}
 				});
+				// $.post('../controller/colMusic.php', {uid : cookie('unique'), type:t}, function(result) {
+				// 	alert('收藏成功');
+				// });
 			} else {
 				alert('您尚未登录');
 			}
@@ -212,7 +222,6 @@ define( function( require, exports, module ) {
 				var info = $.parseJSON(res)[0];
 				$('audio')[0].src = info.src;
 				$('audio')[0].play();
-				$('.fix-bottom').trigger("mouseover");
 			});
 
 			
