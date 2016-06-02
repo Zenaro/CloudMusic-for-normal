@@ -154,7 +154,6 @@ define(function (require, exports, module) {
 
         }).on({
             click: function() {
-                console.log('gege');
                 var originType = self.loopType;
 
                 if (originType === 3) {

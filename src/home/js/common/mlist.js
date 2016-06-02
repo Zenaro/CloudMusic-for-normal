@@ -184,19 +184,7 @@ define( function ( require, exports, module ) {
 				
 			});
 
-			$('audio').on('durationchange', function() {
-				// $.get('../controller/getMInfo.php?src='+$('audio')[0].src, function(res) {
-				// 	var dataID = $.parseJSON(res)[0].music_id;
-				// 	for (var i = 0, length = $(self.list).length; i < length; i++) {
-				// 		if ($(self.list).eq(i).attr('data-id') == dataID) {
-				// 			$(self.list).children('.abs-stus').hide();
-				// 			$(self.list).eq(i).children('.abs-stus').show();
-				// 			break;
-				// 		}
-				// 	}
-				// });
-				
-			}).on('canplay', function() {
+			$('audio').on('canplay', function() {
 				var isset = false,
 					dataSrc = $('audio')[0].src;
 				$.get('../controller/getMInfo.php?src=' + dataSrc, function(res) {
