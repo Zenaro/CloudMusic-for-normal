@@ -22,6 +22,7 @@ define( function ( require, exports, module ) {
 	Dialog.prototype.render = function() {
 		this._init();
 		this._bindUI();
+		console.log(cookie('unique'));
 
 	};
 

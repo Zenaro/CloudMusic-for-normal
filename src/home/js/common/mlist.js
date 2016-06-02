@@ -185,27 +185,37 @@ define( function ( require, exports, module ) {
 			});
 
 			$('audio').on('durationchange', function() {
-				for (var i = 0, length = $(self.list).length; i < length; i++) {
-					if ($(self.list).eq(i).attr('data-id') == $('audio').attr('data-id')) {
-						$(self.list).children('.abs-stus').hide();
-						$(self.list).eq(i).children('.abs-stus').show();
-					}
-				}
+				// $.get('../controller/getMInfo.php?src='+$('audio')[0].src, function(res) {
+				// 	var dataID = $.parseJSON(res)[0].music_id;
+				// 	for (var i = 0, length = $(self.list).length; i < length; i++) {
+				// 		if ($(self.list).eq(i).attr('data-id') == dataID) {
+				// 			$(self.list).children('.abs-stus').hide();
+				// 			$(self.list).eq(i).children('.abs-stus').show();
+				// 			break;
+				// 		}
+				// 	}
+				// });
+				
 			}).on('canplay', function() {
-				var isset = false;
-				for (var i = 0, length = $(self.list).length; i < length; i++) {
-					if ($(self.list).eq(i).attr('data-id') == $('audio').attr('data-id')) {
-						isset = true;
-						$(self.list).children('.abs-stus').hide();
-						$(self.list).eq(i).children('.abs-stus').show();
+				var isset = false,
+					dataSrc = $('audio')[0].src;
+				$.get('../controller/getMInfo.php?src=' + dataSrc, function(res) {
+					var json = $.parseJSON(res)[0],
+						dataID = json.music_id;
+
+					// 检查歌曲列表中有没有存在该歌曲，没有则添加
+					for (var i = 0, length = $(self.list).length; i < length; i++) {
+						if ($(self.list).eq(i).attr('data-id') == dataID) {
+							isset = true;
+							$(self.list).children('.abs-stus').hide();
+							$(self.list).eq(i).children('.abs-stus').show();
+							break;
+						}
 					}
-				}
-				if (!isset) {
-					var dataSrc = $('audio')[0].src;
-					$.get('../controller/getMInfo.php?src=' + dataSrc, function (res) {
-						var json = $.parseJSON(res)[0];
+					if (!isset) {
+						$(self.list).children('.abs-stus').hide();		//先全部隐藏
 						var html = '<li data-id="' + json.music_id + '">' +
-							'<div class="abs-stus"><span class="icn-stus"></span></div>' +
+							'<div class="abs-stus" style="display:block"><span class="icn-stus"></span></div>' +
 							'<div class="col col-1">' + json.name + '</div>' +
 							'<div class="col col-2">' +
 							'<a href="javascript:;" class="icn-col" title="收藏"></a>' +
@@ -216,12 +226,12 @@ define( function ( require, exports, module ) {
 							'<div class="col col-4">03:23</div>' +
 							'</li>';
 						$(self.objList).append(html);
-						$(self.objList).find('.abs-stus').show();
 						var num = $(self.numLi).text();
 						$(self.numLi).text(++num);
 						$(self.objList).siblings('.empty').hide();
-					});
-				}
+					}
+				});
+				
 			});
 
 		},

@@ -96,8 +96,8 @@ define( function( require, exports, module ) {
 
 		function rank(i) {
 
-			$.get('../controller/getRank.php', {data: i}, function(result) {
-				var json = $.parseJSON(result);
+			$.get('../controller/getRank.php', {data: i}, function(res) {
+				var json = $.parseJSON(res);
 				var html = '';
 				$.each(json, function (index, value) {
 					html += '<dd data-id="' + value.music_id + '">' +
@@ -162,18 +162,26 @@ define( function( require, exports, module ) {
 		$('.wrap .main-rank').on('click', this.rankALLPlay, function () {
 
 			var addID = 0,
-				list = $(this).parents('dl').children('dd');
+				html = '',
+				index = $(this).parents('dl').index() / 2;
 
-			for (var i = 0, length = $(list).length; i < length; i++) {
-				addID = $(list).eq(i).attr('data-id');
-				self._appendEle(addID);
-				if (i == 0) {
-					var info = getMInfo(addID);
-					$('audio')[0].src = info.src;
-					$('audio')[0].play();
-					$('.fix-bottom').trigger("mouseover");
+			$.ajax({
+				'url': '../controller/getMusic.php',
+				'data': index,
+				'success': function(res) {
+					var json = $.parseJSON(res);
+					$.each(json, function(index, value) {
+						addID = value.music_id;
+						if (index == 0) {
+							$('audio')[0].src = value.src;
+							$('audio')[0].play();
+							$('.fix-bottom').trigger("mouseover");
+						} else {
+							self._appendEle(addID);
+						}
+					});
 				}
-			}
+			});
 
 		}).on('click', this.rankALLStore, function () {
 

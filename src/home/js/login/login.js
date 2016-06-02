@@ -47,7 +47,7 @@ define( function ( require, exports, module ) {
 					success : function( response, status, xhr ) {
 						if (response != 'false') {
 							cookie('unique', response);
-							window.location.href = './index.html';
+							// window.location.href = './index.html';
 						} else {
 							$(self.tips).html('帐号与密码不匹配，请重新输入');
 						}
