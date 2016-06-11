@@ -55,6 +55,11 @@
         <div class="main-title column">
             <div class="title-img"></div>
             <div class="title-info">
+                <form action="../controller/upload_file.php" method="post" enctype="multipart/form-data">
+                    <label for="file"><h5>上传音乐</h5></label> <br />
+                    <input type="file" name="file" id="file" /> <br />
+                    <input type="submit" name="上传" value="Submit" />
+                </form>
                 <h3><span></span><input type="button" value="编辑个人资料"></h3>
                 <div class="sml sml-area">所在地区：广东省-汕头市</div>
                 <div class="sml sml-age">年龄：00后</div>
